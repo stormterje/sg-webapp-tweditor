@@ -1,0 +1,80 @@
+.storm-browser {
+    background-color: transparent;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    width: calc(100vw - 200px);
+    height: calc(100vh - 150px);
+
+    table {
+        width: calc(100vw - 200px);
+        background-color: rgb(36, 36, 36);
+        border-radius: 25px 25px 0 0;
+
+        td {
+            width: 33%;
+            padding: 5px 10px;
+            border-radius: 25px 25px 0 0;
+        }
+
+        td:nth-child(1) {
+            text-align: left;
+            font-weight: bold;
+        }
+    }
+
+    .close-button {
+        position: absolute;
+        margin: 0 10px;
+        cursor: pointer;
+        background-color: transparent;
+        border: 1px solid rgb(171, 171, 171);
+        border-radius: 25%;
+        padding: 0 6px;
+        float: right;
+        top: 5px;
+        right: 5px;
+    }
+
+    select {
+        font-size: 16px;
+    }
+
+    option {
+        min-height: 1.5rem !important;
+        font-size: 16px;
+        padding: 14px !important;
+        background-color: rgba(43, 42, 40, 1);
+        color: white;
+    }
+
+    .searchfield {
+        width: calc(100% - 240px);
+        margin-right: 10px !important;
+        margin-bottom: 1rem !important;
+        color: white;
+        background-color: lighten(rgba(43, 42, 40, 1), 10%);
+
+        & .MuiInputBase-root {
+            color: white;
+
+            &>fieldset {
+                border-color: rgb(171, 171, 171);
+            }
+
+            &:hover fieldset {
+                border-color: white;
+            }
+
+            &.Mui-focused fieldset {
+                border-color: white;
+            }
+        }
+
+        &>.MuiInputLabel-formControl {
+            color: rgb(171, 171, 171) !important;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+.MuiDataGrid-scrollbarFiller,
+.MuiDataGrid-scrollbarFiller--header {
+    background-color: rgb(24, 24, 24);
+}
+
+.table-header-class {
+    background-color: rgb(24, 24, 24);
+    color: white;
+    font-size: 11px;
+}
+
+.table-header-class:hover {
+    background-color: rgb(24, 24, 24);
+}
+
+.selected-row {
+    background-color: rgb(25, 118, 210) !important;
+}
+
+svg {
+    color: white;
+}

@@ -1,0 +1,20 @@
+.top-menu {
+    background-color: rgba(43, 42, 40, 0.5);
+    color: rgb(255, 255, 255);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 3px 10px;
+    min-width: 150px;
+    min-height: 23px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    svg {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    svg:hover {
+        color: white;
+    }
+}
