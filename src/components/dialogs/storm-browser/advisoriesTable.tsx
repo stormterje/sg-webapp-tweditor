@@ -2,22 +2,20 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useAppState } from "../../../store/mainStore";
 import { Advisory } from "../../../models/advisory";
 import "./advisoriesTable.scss";
+import { useResources } from "../../../store/resourcesStore";
 
 export const AdvisoriesTable = () => {
-  const { advisories, basins, selectedAdvisoryId, setSelectedAdvisoryId } = useAppState();
+  const { advisories, selectedAdvisoryId, setSelectedAdvisoryId } = useAppState();
+  const { basins } = useResources();
 
   const getBasinName = (value: any) => {
     try {
-      let id = value;
-      const basin = basins?.filter((b) => b.basinId == id)[0];
-      if (!basin || !basin.name) {
-        return "??";
-      }
-      return basin.abbreviation?.toUpperCase() ?? "";
+      const basin = basins && basins.get(value);
+      return basin?.abbreviation?.toUpperCase() ?? "";
     } catch (e) {
       console.log(e);
     }
-    return "????";
+    return "??";
   };
 
   const columns: GridColDef[] = [
