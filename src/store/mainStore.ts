@@ -32,32 +32,7 @@ interface AppState {
     setTrackPoints: (tps: TrackPoint[]) => void;
 }
 
-const initialTracpPoints: TrackPoint[] = [
-    {
-        trackPointId: 2849965,
-        trackId: 110287,
-        forecastHour: 0,
-        lat: -11.7,
-        lon: 119.5,
-        stormClassificationId: 18,
-        stormTypeId: null,
-        parameterValues: [],
-        createdAt: null,
-        validTime: null
-    },
-    {
-        trackPointId: 2849966,
-        trackId: 110287,
-        forecastHour: 12,
-        lat: -12.4,
-        lon: 119.7,
-        stormClassificationId: 18,
-        stormTypeId: null,
-        parameterValues: [],
-        createdAt: null,
-        validTime: null
-    }
-];
+const initialTracpPoints: TrackPoint[] = [];
 
 const initialState = {
     appTitle: null,

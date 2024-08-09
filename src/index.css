@@ -72,3 +72,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.MuiDataGrid-scrollbarFiller,
+.MuiDataGrid-filler,
+.MuiDataGrid-scrollbarFiller--header {
+  background-color: rgb(24, 24, 24);
+}
+
+.MuiTablePagination-input,
+.MuiTablePagination-displayedRows,
+.MuiSelect-select,
+.MuiTablePagination-select,
+.MuiTablePagination-selectLabel {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+svg {
+  color: rgba(255, 255, 255, 0.5) !important;
+}

@@ -5,7 +5,7 @@ import { Basin } from '../models/basin';
 import { StormClassification } from '../models/stormClassification';
 import { Confidence } from '../models/confidence';
 import { Trend } from '../models/trend';
-import { TrackPoint } from '../models/trackPoint';
+import { ITrackPoint, TrackPoint } from '../models/trackPoint';
 import { Parameter } from '../models/parameter';
 
 const BASE_URL = 'https://localhost:7091/api';
@@ -80,7 +80,8 @@ export class TWService {
     async getTrackPoints(trackId: number): Promise<TrackPoint[]> {
         const response: AxiosResponse = await client.get(`/track/${trackId}/trackpoints`, config);
         if (response.status === 200) {
-            return response.data as TrackPoint[];
+            var ret = response.data as ITrackPoint[];
+            return ret.map(tp => new TrackPoint(tp));
         }
         return [];
     }
