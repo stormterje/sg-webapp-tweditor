@@ -6,6 +6,7 @@ import { StormClassification } from '../models/stormClassification';
 import { Confidence } from '../models/confidence';
 import { Trend } from '../models/trend';
 import { TrackPoint } from '../models/trackPoint';
+import { Parameter } from '../models/parameter';
 
 const BASE_URL = 'https://localhost:7091/api';
 
@@ -64,6 +65,14 @@ export class TWService {
         const response: AxiosResponse = await client.get(`/resource/trends`, config);
         if (response.status === 200) {
             return response.data as Trend[];
+        }
+        return [];
+    }
+
+    async getParameters(): Promise<Parameter[]> {
+        const response: AxiosResponse = await client.get(`/parameters`, config);
+        if (response.status === 200) {
+            return response.data as Parameter[];
         }
         return [];
     }

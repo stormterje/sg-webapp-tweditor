@@ -7,7 +7,7 @@ import { useResources } from "./store/resourcesStore";
 import "./App.scss";
 import { Wizard } from "./components/dialogs/wizard/wizard";
 import { MainMap } from "./components/main-map/mainMap";
-import { AltMap } from "./components/alt-map/altMap";
+// import { AltMap } from "./components/alt-map/altMap";
 
 function App() {
   const { stormBrowserVisible } = useAppState();
@@ -20,6 +20,8 @@ function App() {
     condidencesLoadingFinished,
     loadTrends,
     trendsLoadingFinished,
+    loadParameters,
+    parametersLoadingFinished,
   } = useResources();
 
   useEffect(() => {
@@ -27,10 +29,11 @@ function App() {
     loadStormClassifications();
     loadConfidences();
     loadTrends();
+    loadParameters();
   }, []);
 
   const loadFinished = (): boolean => {
-    return basinsLoadingFinished && stormClassificationsLoadingFinished && condidencesLoadingFinished && trendsLoadingFinished;
+    return basinsLoadingFinished && stormClassificationsLoadingFinished && condidencesLoadingFinished && trendsLoadingFinished && parametersLoadingFinished;
   };
 
   return (

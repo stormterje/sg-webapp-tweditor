@@ -28,7 +28,7 @@ export const StormBrowser = () => {
           <div style={{ flex: "1", height: "calc((100vh - 295px)/2)" }}>
             {!selectedStormId && <h3>Select a storm</h3>}
             {isAdvisoriesLoading && <h3>Advisories loading...</h3>}
-            {advisories.length === 0 && <h3>No advisories for storm</h3>}
+            {advisories.length === 0 && <></>}
             {advisories.length > 0 && <AdvisoriesTable />}
           </div>
           <Button
