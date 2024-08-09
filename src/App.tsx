@@ -1,28 +1,46 @@
 import { useEffect } from "react";
-import "./App.scss";
 import { StormBrowser } from "./components/dialogs/storm-browser/stormBrowser";
 import { TopMenu } from "./components/menus/topMenu";
 import { useAppState } from "./store/mainStore";
 import { useResources } from "./store/resourcesStore";
 
+import "./App.scss";
+import { Wizard } from "./components/dialogs/wizard/wizard";
+import { MainMap } from "./components/main-map/mainMap";
+import { AltMap } from "./components/alt-map/altMap";
+
 function App() {
   const { stormBrowserVisible } = useAppState();
-  const { loadBasins, basinsLoadingFinished, loadStormClassifications, stormClassificationsLoadingFinished, loadConfidences, condidencesLoadingFinished } =
-    useResources();
+  const {
+    loadBasins,
+    basinsLoadingFinished,
+    loadStormClassifications,
+    stormClassificationsLoadingFinished,
+    loadConfidences,
+    condidencesLoadingFinished,
+    loadTrends,
+    trendsLoadingFinished,
+  } = useResources();
 
   useEffect(() => {
-    async () => {
-      await loadBasins();
-      await loadStormClassifications();
-      await loadConfidences();
-    };
+    loadBasins();
+    loadStormClassifications();
+    loadConfidences();
+    loadTrends();
   }, []);
+
+  const loadFinished = (): boolean => {
+    return basinsLoadingFinished && stormClassificationsLoadingFinished && condidencesLoadingFinished && trendsLoadingFinished;
+  };
 
   return (
     <>
+      <MainMap />
+      {/* <AltMap /> */}
       <TopMenu />
+      {!loadFinished() && <h1>Loading resources...</h1>}
+      <Wizard />
       {stormBrowserVisible && <StormBrowser />}
-      {!basinsLoadingFinished && !stormClassificationsLoadingFinished && !condidencesLoadingFinished && <h1>Loading resources...</h1>}
     </>
   );
 }

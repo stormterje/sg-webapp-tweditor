@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useAppState } from "../../../store/mainStore";
-import "./stormBrowser.scss";
 import { Header } from "./header";
 import { StormsTable } from "./stormsTable";
 import { Button } from "@mui/material";
 import { AdvisoriesTable } from "./advisoriesTable";
 import { SearchBox } from "./searchBox";
+
+import "./stormBrowser.scss";
 
 export const StormBrowser = () => {
   const { loadStorms, selectedStormId, isAdvisoriesLoading, advisories, selectedAdvisoryId, setStormBrowserVisible } = useAppState();
@@ -15,7 +16,7 @@ export const StormBrowser = () => {
   }, []);
 
   return (
-    <div className="storm-browser" style={{ padding: "0" }}>
+    <div className="storm-browser">
       <Header />
       <SearchBox />
       <div style={{ display: "flex", flexDirection: "row" }}>
@@ -23,7 +24,7 @@ export const StormBrowser = () => {
           <StormsTable />
         </div>
         <div style={{ flex: "1", flexDirection: "column" }}>
-          <div style={{ flex: "1", height: "calc((100vh - 295px)/2)", backgroundColor: "transparent" }}></div>
+          <div style={{ flex: "1", height: "calc((100vh - 295px)/2)", backgroundColor: "rgb(36,36,36)" }}></div>
           <div style={{ flex: "1", height: "calc((100vh - 295px)/2)" }}>
             {!selectedStormId && <h3>Select a storm</h3>}
             {isAdvisoriesLoading && <h3>Advisories loading...</h3>}

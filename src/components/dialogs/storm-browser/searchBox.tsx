@@ -22,7 +22,7 @@ export const SearchBox = () => {
         id="year"
         value=""
         onChange={(year) => yearSelected(year)}
-        style={{ height: "36px", width: "80px", position: "relative", top: "0", backgroundColor: "transparent" }}
+        style={{ height: "36px", width: "80px", position: "relative", top: "0", backgroundColor: "rgb(36,36,36)" }}
       >
         <option value="2024" className="boldoption">
           2024

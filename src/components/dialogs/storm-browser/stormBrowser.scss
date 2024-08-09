@@ -1,5 +1,7 @@
 .storm-browser {
-    background-color: transparent;
+    z-index: 10000;
+    padding: 0;
+    background-color: rgb(36, 36, 36) !important;
     border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     position: absolute;
@@ -29,7 +31,7 @@
         position: absolute;
         margin: 0 10px;
         cursor: pointer;
-        background-color: transparent;
+        background-color: darken(rgb(36, 36, 36), 50%);
         border: 1px solid rgb(171, 171, 171);
         border-radius: 25%;
         padding: 0 6px;

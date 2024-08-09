@@ -2,14 +2,13 @@ import { create } from "zustand";
 import { TWService } from "../services/twService";
 import { Storm } from "../models/storm";
 import { Advisory } from "../models/advisory";
-import { Basin } from "../models/basin";
+import { TrackPoint } from "../models/trackPoint";
 
 const twService: TWService = new TWService();
 
 interface AppState {
     appTitle: string | null | undefined;
     errorMessage: string | null;
-    basins: Basin[];
     stormBrowserVisible: boolean;
     storms: Storm[];
     isStormsLoading: boolean;
@@ -17,29 +16,63 @@ interface AppState {
     advisories: Advisory[];
     selectedAdvisoryId: number | null;
     isAdvisoriesLoading: boolean;
+    advisory: Advisory | null;
+    isAdvisoryLoading: boolean;
+    trackPoints: TrackPoint[];
 
     setAppTitle: (s: string) => void;
     clearAppTitle: () => void;
     setStormBrowserVisible: (v: boolean) => void;
     setSelectedStormId: (id: number) => void;
     setSelectedAdvisoryId: (id: number | null) => void;
-    loadBasins: () => void;
+    setAdvisory: (advisory: Advisory | null) => void;
     loadStorms: () => void;
-    loadAdvisories: (id: number) => void;
+    loadAdvisories: (stormId: number) => void;
+    loadAdvisory: (advisoryId: number) => void;
+    setTrackPoints: (tps: TrackPoint[]) => void;
 }
+
+const initialTracpPoints: TrackPoint[] = [
+    {
+        trackPointId: 2849965,
+        trackId: 110287,
+        forecastHour: 0,
+        lat: -11.7,
+        lon: 119.5,
+        stormClassificationId: 18,
+        stormTypeId: null,
+        parameterValues: [],
+        createdAt: null,
+        validTime: null
+    },
+    {
+        trackPointId: 2849966,
+        trackId: 110287,
+        forecastHour: 12,
+        lat: -12.4,
+        lon: 119.7,
+        stormClassificationId: 18,
+        stormTypeId: null,
+        parameterValues: [],
+        createdAt: null,
+        validTime: null
+    }
+];
 
 const initialState = {
     appTitle: null,
     count: 0,
     errorMessage: null,
-    stormBrowserVisible: false,
+    stormBrowserVisible: true,
     selectedStormId: null,
     isStormsLoading: false,
     isAdvisoriesLoading: false,
     selectedAdvisoryId: null,
-    basins: [],
     storms: [],
     advisories: [],
+    trackPoints: initialTracpPoints,
+    advisory: null,
+    isAdvisoryLoading: false,
 };
 
 export const useAppState = create<AppState>((set) => ({
@@ -55,13 +88,11 @@ export const useAppState = create<AppState>((set) => ({
     setSelectedAdvisoryId: (id: number | null) => {
         set(() => ({ selectedAdvisoryId: id }));
     },
-    loadBasins: async () => {
-        try {
-            let basins = await twService.getBasins();
-            set({ basins: basins });
-        } catch (err: any) {
-            set({ errorMessage: err.message });
-        }
+    setAdvisory: (advisory: Advisory | null) => {
+        set(() => ({ advisory: advisory }));
+    },
+    setTrackPoints: (tps: TrackPoint[]) => {
+        set(() => ({ trackPoints: tps }));
     },
     loadStorms: async () => {
         set({ errorMessage: null });
@@ -84,5 +115,21 @@ export const useAppState = create<AppState>((set) => ({
             set({ errorMessage: err.message });
         }
         set({ isAdvisoriesLoading: false });
+    },
+
+    loadAdvisory: async (advisoryId: number) => {
+        set({ errorMessage: null });
+        set({ isAdvisoryLoading: true });
+        try {
+            let adv = await twService.getAdvisory(advisoryId);
+            set({ advisory: adv });
+            if (adv) {
+                var tps = await twService.getTrackPoints(adv.trackId);
+                set({ trackPoints: tps });
+            }
+        } catch (err: any) {
+            set({ errorMessage: err.message });
+        }
+        set({ isAdvisoryLoading: false });
     },
 }));

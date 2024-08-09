@@ -4,6 +4,8 @@ import { Advisory } from '../models/advisory';
 import { Basin } from '../models/basin';
 import { StormClassification } from '../models/stormClassification';
 import { Confidence } from '../models/confidence';
+import { Trend } from '../models/trend';
+import { TrackPoint } from '../models/trackPoint';
 
 const BASE_URL = 'https://localhost:7091/api';
 
@@ -17,13 +19,8 @@ const config: AxiosRequestConfig = {
     } as RawAxiosRequestHeaders,
 };
 
-function delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export class TWService {
     async getStorms(): Promise<Storm[]> {
-        await delay(5000);
         const response: AxiosResponse = await client.get('/storm', config);
         if (response.status === 200) {
             return response.data as Storm[];
@@ -40,7 +37,6 @@ export class TWService {
     }
 
     async getBasins(): Promise<Basin[]> {
-        await delay(5000);
         const response: AxiosResponse = await client.get(`/resource/basins`, config);
         if (response.status === 200) {
             return response.data as Basin[];
@@ -49,7 +45,6 @@ export class TWService {
     }
 
     async getStormClassifications(): Promise<StormClassification[]> {
-        await delay(5000);
         const response: AxiosResponse = await client.get(`/resource/storm-classification`, config);
         if (response.status === 200) {
             return response.data as StormClassification[];
@@ -64,4 +59,41 @@ export class TWService {
         }
         return [];
     }
+
+    async getTrends(): Promise<Trend[]> {
+        const response: AxiosResponse = await client.get(`/resource/trends`, config);
+        if (response.status === 200) {
+            return response.data as Trend[];
+        }
+        return [];
+    }
+
+    async getTrackPoints(trackId: number): Promise<TrackPoint[]> {
+        const response: AxiosResponse = await client.get(`/track/${trackId}/trackpoints`, config);
+        if (response.status === 200) {
+            return response.data as TrackPoint[];
+        }
+        return [];
+    }
+
+
+    async updateAdvisory(advisory: Advisory): Promise<void> {
+        try {
+            console.log(`Gong to save advisory\n${JSON.stringify(advisory, null, '  ')}`);
+            const response: AxiosResponse = await client.put(`/advisory/${advisory.advisoryId}`, advisory, config);
+            console.log(JSON.stringify(response));
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getAdvisory(id: number): Promise<Advisory | null> {
+        const response: AxiosResponse = await client.get(`/advisory/${id}`, config);
+        if (response.status === 200) {
+            return response.data as Advisory;
+        }
+        return null;
+    }
+
 }
