@@ -1,0 +1,65 @@
+.advisory-form {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content min-content;
+        grid-gap: 10px;
+        height: calc(100vh - 10px);
+
+        div {
+            padding: 0 10px;
+        }
+
+        div:nth-child(3) {
+            padding: 0 !important;
+        }
+    }
+}
+
+select {
+    height: 36px;
+    background-color: rgb(69, 68, 65);
+}
+
+option {
+    min-height: 1.5rem !important;
+    margin: 10px !important;
+    font-size: 12px;
+    background-color: rgba(43, 42, 40, 1);
+    color: white;
+}
+
+.basin-select {
+    grid-column: span 4;
+    width: 100%;
+}
+
+.inputfield {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    color: white;
+    background-color: lighten(rgba(43, 42, 40, 1), 10%);
+
+    & .MuiInputBase-root {
+        color: white;
+        font-size: 10pt;
+
+        &>fieldset {
+            border-color: rgb(171, 171, 171);
+        }
+
+        &:hover fieldset {
+            border-color: white;
+        }
+
+        &.Mui-focused fieldset {
+            border-color: white;
+        }
+    }
+
+    &>.MuiInputLabel-formControl {
+        color: rgb(171, 171, 171) !important;
+    }
+
+}

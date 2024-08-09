@@ -1,0 +1,26 @@
+th {
+    font-weight: 100;
+    border-right: 1px solid #1B1717;
+    padding: 0 5px;
+}
+
+td {
+    text-align: right;
+}
+
+td:first-child,
+td:last-child {
+    text-align: center;
+}
+
+.wizard-container {
+    z-index: 100;
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    height: 80%;
+    width: 75%;
+    background-color: rgb(44, 42, 41);
+    border-radius: 20px;
+    padding: 10px 20px;
+}

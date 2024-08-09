@@ -1,0 +1,22 @@
+.grid-container {
+    display: grid;
+    width: 100%;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 7fr;
+
+    .box {
+        background-color: transparent;
+        text-align: center;
+    }
+
+    .box:nth-child(7n) {
+        background-color: black;
+    }
+
+    .radii-grid {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+}
